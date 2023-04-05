@@ -1,0 +1,63 @@
+C51 COMPILER V9.60.0.0   WEEK4DAY2_2                                                       02/15/2021 21:57:05 PAGE 1   
+
+
+C51 COMPILER V9.60.0.0, COMPILATION OF MODULE WEEK4DAY2_2
+OBJECT MODULE PLACED IN .\Objects\week4day2_2.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE week4day2_2.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listin
+                    -gs\week4day2_2.lst) TABS(2) OBJECT(.\Objects\week4day2_2.obj)
+
+line level    source
+
+   1          #include<reg52.h> //including sfr registers for ports of the controller
+   2          #include<lcd.h> //Can be download from bottom of this article
+*** WARNING C318 IN LINE 2 OF week4day2_2.c: can't open file 'lcd.h'
+   3          
+   4          //LCD Module Connections
+   5          sbit RS = P0^0;
+   6          sbit EN = P0^1;
+   7          sbit D4 = P2^4;
+   8          sbit D5 = P2^5;
+   9          sbit D6 = P2^6;
+  10          sbit D7 = P2^7;
+  11          //End LCD Module Connections
+  12          void Delay(int a)
+  13          {
+  14   1        int j;
+  15   1        int i;
+  16   1        for(i=0;i<a;i++)
+  17   1        {
+  18   2          for(j=0;j<100;j++)
+  19   2          {
+  20   3          }
+  21   2        }
+  22   1      }
+  23          void main()
+  24          {
+  25   1        int i;
+  26   1        Lcd4_Init();
+*** WARNING C206 IN LINE 26 OF week4day2_2.c: 'Lcd4_Init': missing function-prototype
+  27   1        while(1)
+  28   1        {
+  29   2          Lcd4_Set_Cursor(1,1);
+*** WARNING C206 IN LINE 29 OF week4day2_2.c: 'Lcd4_Set_Cursor': missing function-prototype
+*** ERROR C267 IN LINE 29 OF week4day2_2.c: 'Lcd4_Set_Cursor': requires ANSI-style prototype
+  30   2          Lcd4_Write_String("electroSome LCD Hello World");
+  31   2          for(i=0;i<15;i++)
+  32   2          {
+  33   3            Delay(1000);
+  34   3            Lcd4_Shift_Left();
+  35   3          }
+  36   2          for(i=0;i<15;i++)
+  37   2          {
+  38   3            Delay(1000);
+  39   3            Lcd4_Shift_Right();
+  40   3          }
+  41   2          Lcd4_Clear();
+  42   2          Lcd4_Set_Cursor(2,1);
+  43   2          Lcd4_Write_Char('e');
+  44   2          Lcd4_Write_Char('S');
+  45   2          Delay(2000);
+  46   2        }
+  47   1      }
+
+C51 COMPILATION COMPLETE.  3 WARNING(S),  1 ERROR(S)

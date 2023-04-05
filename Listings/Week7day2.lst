@@ -1,0 +1,260 @@
+C51 COMPILER V9.60.0.0   WEEK7DAY2                                                         03/08/2021 13:28:13 PAGE 1   
+
+
+C51 COMPILER V9.60.0.0, COMPILATION OF MODULE WEEK7DAY2
+OBJECT MODULE PLACED IN .\Objects\Week7day2.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE Week7day2.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings
+                    -\Week7day2.lst) TABS(2) OBJECT(.\Objects\Week7day2.obj)
+
+line level    source
+
+   1          #include<reg51.h> 
+   2          #define lcd P0
+   3          sbit rs=P2^0;
+   4          sbit e=P2^1;
+   5          
+   6          sbit sw1=P1^2;
+   7          sbit sw2=P1^1;
+   8          sbit sw3=P1^3;
+   9          sbit sw4=P1^0;
+  10          
+  11          sbit forward = P3^0;
+  12          sbit backward = P3^1;
+  13          sbit stop = P3^2;
+  14          
+  15          
+  16          void delay (int);
+  17          void cmd (unsigned char);
+  18          void display (unsigned char);
+  19          void string (char *);
+  20          void init (void);
+  21          
+  22          
+  23          void delay (int d)
+  24          {
+  25   1        unsigned char i;
+  26   1        for(;d>0;d--)
+  27   1        {
+  28   2          for(i=250;i>0;i--);
+  29   2          for(i=248;i>0;i--);
+  30   2        }
+  31   1      }
+  32          void cmd (unsigned char c)
+  33          {
+  34   1        lcd=c;
+  35   1        rs=0;
+  36   1        e=1;
+  37   1        delay(10);
+  38   1        e=0;
+  39   1      }
+  40          void display (unsigned char c)
+  41          {
+  42   1        lcd=c;
+  43   1        rs=1;
+  44   1        e=1;
+  45   1        delay(10);
+  46   1        e=0;
+  47   1      }
+  48          void string (char *p)
+  49          {
+  50   1        while(*p)
+  51   1        {
+  52   2          display(*p++);
+  53   2        }
+  54   1      }
+C51 COMPILER V9.60.0.0   WEEK7DAY2                                                         03/08/2021 13:28:13 PAGE 2   
+
+  55          void init (void)
+  56          {
+  57   1        cmd(0x38);
+  58   1        cmd(0x0c);
+  59   1        cmd(0x01);
+  60   1        cmd(0x80);
+  61   1      }
+  62          
+  63          void main()i
+  64          {
+*** ERROR C132 IN LINE 64 OF Week7day2.c: 'i': not in formal parameter list
+*** ERROR C141 IN LINE 64 OF Week7day2.c: syntax error near '{', expected ';'
+  65            int z=0;
+*** ERROR C244 IN LINE 65 OF Week7day2.c: 'z': can't initialize, bad type or class
+*** ERROR C132 IN LINE 65 OF Week7day2.c: 'z': not in formal parameter list
+  66            init();
+*** ERROR C132 IN LINE 66 OF Week7day2.c: 'init': not in formal parameter list
+  67            P3=0xff;
+*** ERROR C244 IN LINE 67 OF Week7day2.c: 'P3': can't initialize, bad type or class
+*** ERROR C132 IN LINE 67 OF Week7day2.c: 'P3': not in formal parameter list
+  68            P1=0x00;
+*** ERROR C244 IN LINE 68 OF Week7day2.c: 'P1': can't initialize, bad type or class
+*** ERROR C132 IN LINE 68 OF Week7day2.c: 'P1': not in formal parameter list
+  69            abc:
+*** ERROR C132 IN LINE 69 OF Week7day2.c: 'abc': not in formal parameter list
+*** ERROR C141 IN LINE 69 OF Week7day2.c: syntax error near ':', expected ';'
+  70            cmd(0x80);
+*** ERROR C132 IN LINE 70 OF Week7day2.c: 'cmd': not in formal parameter list
+  71            while(stop==0);
+*** ERROR C141 IN LINE 71 OF Week7day2.c: syntax error near 'while', expected 'hdata'
+*** ERROR C141 IN LINE 71 OF Week7day2.c: syntax error near '==', expected ')'
+  72            string("Press Forward Or");
+*** ERROR C141 IN LINE 72 OF Week7day2.c: syntax error near '<string>', expected 'bit'
+*** ERROR C231 IN LINE 72 OF Week7day2.c: '_string': redefinition
+  73            cmd(0xc0);
+*** ERROR C141 IN LINE 73 OF Week7day2.c: syntax error near '0xc0', expected 'bit'
+*** ERROR C231 IN LINE 73 OF Week7day2.c: '_cmd': redefinition
+  74            string("Backward To Run");
+*** ERROR C141 IN LINE 74 OF Week7day2.c: syntax error near '<string>', expected 'bit'
+*** ERROR C231 IN LINE 74 OF Week7day2.c: '_string': redefinition
+  75            forward=1;
+*** ERROR C231 IN LINE 75 OF Week7day2.c: 'forward': redefinition
+*** ERROR C231 IN LINE 75 OF Week7day2.c: 'forward': redefinition
+  76            backward=1;
+*** ERROR C231 IN LINE 76 OF Week7day2.c: 'backward': redefinition
+*** ERROR C231 IN LINE 76 OF Week7day2.c: 'backward': redefinition
+  77            while(1)
+*** ERROR C141 IN LINE 77 OF Week7day2.c: syntax error near 'while', expected 'hdata'
+*** ERROR C141 IN LINE 77 OF Week7day2.c: syntax error near '1', expected 'hdata'
+  78            {
+  79                      if(forward==0)
+*** ERROR C141 IN LINE 79 OF Week7day2.c: syntax error near '==', expected ')'
+  80                      { 
+  81                        cmd(0x01);
+*** ERROR C141 IN LINE 81 OF Week7day2.c: syntax error near '0x01', expected 'bit'
+*** ERROR C231 IN LINE 81 OF Week7day2.c: '_cmd': redefinition
+  82                        cmd(0x80);
+*** ERROR C141 IN LINE 82 OF Week7day2.c: syntax error near '0x80', expected 'bit'
+*** ERROR C231 IN LINE 82 OF Week7day2.c: '_cmd': redefinition
+  83                        string("Running Forward");              
+*** ERROR C141 IN LINE 83 OF Week7day2.c: syntax error near '<string>', expected 'bit'
+*** ERROR C231 IN LINE 83 OF Week7day2.c: '_string': redefinition
+C51 COMPILER V9.60.0.0   WEEK7DAY2                                                         03/08/2021 13:28:13 PAGE 3   
+
+  84                        while(forward==0);              
+*** ERROR C141 IN LINE 84 OF Week7day2.c: syntax error near 'while', expected 'hdata'
+*** ERROR C141 IN LINE 84 OF Week7day2.c: syntax error near '==', expected ')'
+  85                        while(1)
+*** ERROR C141 IN LINE 85 OF Week7day2.c: syntax error near '1', expected 'hdata'
+  86                        {
+  87                          z++;
+*** ERROR C129 IN LINE 87 OF Week7day2.c: missing ';' before '++'
+  88                          if(z==1)
+  89                          {
+  90                           sw1=1;sw2=0;sw3=0;sw4=0;delay(30);
+  91                           if(backward==0 || stop==0)
+  92                           break;                  
+  93                          }
+  94                          else if(z==2) 
+  95                          {
+  96                           sw1=1;sw2=1;sw3=0;sw4=0;delay(30); 
+  97                           if(backward==0 || stop==0)
+  98                           break;
+  99                          }
+ 100                          else if(z==3)
+ 101                          {
+ 102                           sw1=0;sw2=1;sw3=0;sw4=0;delay(30); 
+ 103                           if(backward==0 || stop==0)
+ 104                           break;
+ 105                          }
+ 106                          else if(z==4)
+ 107                          {
+ 108                           sw1=0;sw2=1;sw3=1;sw4=0;delay(30); 
+ 109                           if(backward==0 || stop==0)
+ 110                           break;
+ 111                          }
+ 112                          else if(z==5)
+ 113                          {
+ 114                           sw1=0;sw2=0;sw3=1;sw4=0;delay(30); 
+ 115                           if(backward==0 || stop==0)
+ 116                           break;
+ 117                          }
+ 118                          else if(z==6)
+ 119                          {                 
+ 120                           sw1=0;sw2=0;sw3=1;sw4=1;delay(30); 
+ 121                           if(backward==0 || stop==0)
+ 122                           break;
+ 123                          }
+ 124                          else if(z==7)
+ 125                          {
+ 126                           sw1=0;sw2=0;sw3=0;sw4=1;delay(30); 
+ 127                           if(backward==0 || stop==0)
+ 128                           break;
+ 129                          }
+ 130                          else if(z==8)
+ 131                          {
+ 132                           z=0;
+ 133                           sw1=1;sw2=0;sw3=0;sw4=1;delay(30);
+ 134                           if(backward==0 || stop==0)
+ 135                           break;
+ 136                          }
+ 137                        }
+ 138                      }
+ 139                      
+ 140                      if(backward==0)
+ 141                      { 
+C51 COMPILER V9.60.0.0   WEEK7DAY2                                                         03/08/2021 13:28:13 PAGE 4   
+
+ 142                        cmd(0x01);
+ 143                        cmd(0x80);
+ 144                        string("Running Backward");
+ 145                        while(backward==0);             
+ 146                        while(1)
+ 147                        {
+ 148                          z++;
+ 149                          if(z==1)
+ 150                          {
+ 151                           sw1=1;sw2=0;sw3=0;sw4=1;delay(30);
+ 152                           if(forward==0 || stop==0)
+ 153                           break;                  
+ 154                          }
+ 155                          else if(z==2) 
+ 156                          {
+ 157                           sw1=0;sw2=0;sw3=0;sw4=1;delay(30); 
+ 158                           if(forward==0 || stop==0)
+ 159                           break;
+ 160                          }
+ 161                          else if(z==3)
+ 162                          {
+ 163                           sw1=0;sw2=0;sw3=1;sw4=1;delay(30); 
+ 164                           if(forward==0 || stop==0)
+ 165                           break;
+ 166                          }
+ 167                          else if(z==4)
+ 168                          {
+ 169                           sw1=0;sw2=0;sw3=1;sw4=0;delay(30); 
+ 170                           if(forward==0 || stop==0)
+ 171                           break;
+ 172                          }
+ 173                          else if(z==5)
+ 174                          {
+ 175                           sw1=0;sw2=1;sw3=1;sw4=0;delay(30);
+ 176                           if(forward==0 || stop==0)
+ 177                           break;
+ 178                          }
+ 179                          else if(z==6)
+ 180                          { 
+ 181                           sw1=0;sw2=1;sw3=0;sw4=0;delay(30);                   
+ 182                           if(forward==0 || stop==0)
+ 183                           break;
+ 184                          }
+ 185                          else if(z==7)
+ 186                          {
+ 187                           sw1=1;sw2=1;sw3=0;sw4=0;delay(30); 
+ 188                           if(forward==0 || stop==0)
+ 189                           break;
+ 190                          }
+ 191                          else if(z==8)
+ 192                          {
+ 193                           z=0;
+ 194                           sw1=1;sw2=0;sw3=0;sw4=0;delay(30); 
+ 195                           if(forward==0 || stop==0)
+ 196                           break;
+ 197                          }
+ 198                        }
+ 199                      }
+ 200                      if(stop==0)
+ 201                        goto abc;
+ 202                    }
+ 203          }
+C51 COMPILER V9.60.0.0   WEEK7DAY2                                                         03/08/2021 13:28:13 PAGE 5   
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  37 ERROR(S)

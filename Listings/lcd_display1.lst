@@ -1,0 +1,170 @@
+C51 COMPILER V9.60.0.0   LCD_DISPLAY1                                                      02/15/2021 20:46:24 PAGE 1   
+
+
+C51 COMPILER V9.60.0.0, COMPILATION OF MODULE LCD_DISPLAY1
+OBJECT MODULE PLACED IN .\Objects\lcd_display1.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE lcd_display1.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listi
+                    -ngs\lcd_display1.lst) TABS(2) OBJECT(.\Objects\lcd_display1.obj)
+
+line level    source
+
+   1          #include<reg51.h>
+   2          
+   3          //Function declarations
+   4          void cct_init(void);
+   5          void delay(int);
+   6          void lcdinit(void);
+   7          void writecmd(int);
+   8          void writedata(char);
+   9          void ReturnHome(void);
+  10          
+  11          //*******************
+  12          //Pin description
+  13          /*
+  14          P2 is data bus
+  15          P1.0 is RS
+  16          P1.1 is E
+  17          */
+  18          //********************
+  19          
+  20          // Defines Pins
+  21          sbit RS = P1^0;
+  22          sbit E  = P1^1;
+  23          
+  24          // ***********************************************************
+  25          // Main program
+  26          //
+  27          void main(void)
+  28          {
+  29   1         cct_init();                                     //Make all ports zero
+  30   1      
+  31   1         lcdinit();                                      //Initilize LCD
+  32   1      
+  33   1         writecmd(0x81);
+  34   1         writedata('0');                                 //write
+  35   1         writedata('1');                                 //write
+  36   1         writedata('2');                                 //write
+  37   1         writedata('3');                                 //write
+  38   1         writedata('4');                                 //write
+  39   1         writedata('4');                                 //write
+  40   1         writedata('5');                                 //write
+  41   1         writedata('6');                                 //write
+  42   1         writedata('7');                                 //write
+  43   1         writedata('8');                                 //write
+  44   1         writedata('9');                                 //write
+  45   1         writedata('P');                                 //write
+  46   1         writedata('H');                                 //write
+  47   1         writedata('Y');                                 //write
+  48   1         writedata('3');                                 //write
+  49   1         writedata('1');                                 //write
+  50   1         writedata('2');                                 //write
+  51   1         writedata(',');                                 //write
+  52   1      
+  53   1         writecmd(0xc4);
+  54   1      
+C51 COMPILER V9.60.0.0   LCD_DISPLAY1                                                      02/15/2021 20:46:24 PAGE 2   
+
+  55   1         writedata('A');                                 //write
+  56   1         writedata('d');                                 //write
+  57   1         writedata('v');                                 //write
+  58   1         writedata('a');                                 //write
+  59   1         writedata('n');                                 //write
+  60   1         writedata('c');                                 //write
+  61   1         writedata('e');                                 //write
+  62   1         writedata('d');                                 //write
+  63   1         writedata(' ');                                 //write
+  64   1         writedata('E');                                 //write
+  65   1         writedata('l');                                 //write
+  66   1         writedata('e');                                 //write
+  67   1         writedata('c');                                 //write
+  68   1         writedata('t');                                 //write
+  69   1         writedata('r');                                 //write
+  70   1         writedata('o');                                 //write
+  71   1         writedata('n');                                 //write
+  72   1         writedata('i');                                 //write
+  73   1         writedata('c');                                 //write
+  74   1         writedata('s');                                 //write
+  75   1       
+  76   1      
+  77   1      
+  78   1         ReturnHome();                                   //Return to 0 position
+  79   1      
+  80   1          while(1)
+  81   1          {
+  82   2          }
+  83   1      
+  84   1      }
+  85          
+  86          
+  87          void cct_init(void)
+  88          {
+  89   1      P0 = 0x00;   //not used 
+  90   1      P1 = 0x00;   //not used 
+  91   1      P2 = 0x00;   //used as data port
+  92   1      P3 = 0x00;   //used for generating E and RS
+  93   1      }
+  94          
+  95          void delay(int a)
+  96          {
+  97   1         int i;
+  98   1         for(i=0;i<a;i++);   //null statement
+  99   1      }
+ 100          
+ 101          void writedata(char t)
+ 102          {
+ 103   1         RS = 1;             // => RS = 1
+ 104   1         P2 = t;             //Data transfer
+ 105   1         E  = 1;             // => E = 1
+ 106   1         delay(150);
+ 107   1         E  = 0;             // => E = 0
+ 108   1         delay(150);
+ 109   1      }
+ 110          
+ 111          
+ 112          void writecmd(int z)
+ 113          {
+ 114   1         RS = 0;             // => RS = 0
+ 115   1         P2 = z;             //Data transfer
+ 116   1         E  = 1;             // => E = 1
+C51 COMPILER V9.60.0.0   LCD_DISPLAY1                                                      02/15/2021 20:46:24 PAGE 3   
+
+ 117   1         delay(150);
+ 118   1         E  = 0;             // => E = 0
+ 119   1         delay(150);
+ 120   1      }
+ 121          
+ 122          void lcdinit(void)
+ 123          {
+ 124   1          delay(15000);
+ 125   1         writecmd(0x30);
+ 126   1           delay(4500);
+ 127   1         writecmd(0x30);
+ 128   1           delay(300);
+ 129   1         writecmd(0x30);
+ 130   1           delay(650);
+ 131   1      
+ 132   1         writecmd(0x38);    //function set
+ 133   1         writecmd(0x0c);    //display on,cursor off,blink off
+ 134   1         writecmd(0x01);    //clear display
+ 135   1         writecmd(0x06);    //entry mode, set increment 
+ 136   1      }
+ 137          
+ 138          void ReturnHome(void)     //Return to 0 location
+ 139          {
+ 140   1        writecmd(0x02);
+ 141   1          delay(1500);
+ 142   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    360    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

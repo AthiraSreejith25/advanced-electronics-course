@@ -1,0 +1,112 @@
+C51 COMPILER V9.60.0.0   WEEK4DAY3_1                                                       02/15/2021 23:24:25 PAGE 1   
+
+
+C51 COMPILER V9.60.0.0, COMPILATION OF MODULE WEEK4DAY3_1
+OBJECT MODULE PLACED IN .\Objects\week4day3_1.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE week4day3_1.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listin
+                    -gs\week4day3_1.lst) TABS(2) OBJECT(.\Objects\week4day3_1.obj)
+
+line level    source
+
+   1          #include <reg51.h>
+   2          sbit rs=P1^2;
+   3          sbit rw=P1^1;
+   4          sbit en=P1^0;
+   5          sbit rd=P1^3;
+   6          sbit wr=P1^4;
+   7          sbit intr=P1^5;
+   8          void msdelay(unsigned int t);
+   9          void cmd(unsigned char cmdword);
+  10          void init();
+  11          void senddata(unsigned char mymsg);
+  12          void CaD(unsigned char value);
+  13          void main()
+  14           { unsigned char B_Data;
+  15   1       init();
+  16   1      
+  17   1       P3 = 0xFF;
+  18   1       intr = 1;
+  19   1       rd = 1;
+  20   1       wr = 1;
+  21   1      
+  22   1       while(1)
+  23   1       {
+  24   2       wr = 0;
+  25   2       wr = 1;
+  26   2       while(intr == 1);
+  27   2      
+  28   2       rd=0;
+  29   2       B_Data = P3;
+  30   2       CaD(B_Data);
+  31   2       rd = 1;
+  32   2       }
+  33   1       }
+  34          void msdelay(unsigned int t)
+  35          {
+  36   1      unsigned int i,j;
+  37   1      for (i=0;i<t;i++)
+  38   1      for (j=0;j<1275;j++);
+  39   1      }
+  40          void cmd(unsigned char cmdword) //sub. to write commands
+  41           { 
+  42   1       P0 = cmdword;
+  43   1       rs=0; //select the instruction register
+  44   1       rw=0; // 0 for write operation
+  45   1       en=1; // to strobe the data
+  46   1       msdelay(2); // create some delay
+  47   1       en=0; // reset strobe signal
+  48   1       }
+  49          void init() //lcd initializtion
+  50           {
+  51   1       cmd(0x38); //function set: 8 bit, 2 lines, 5x7 dot matirx
+  52   1       cmd(0x0E); //display on and cursor on
+  53   1       cmd(0x01); // clear display
+  54   1       cmd(0x06); // entry mode: move cursor right, don’t shift display
+C51 COMPILER V9.60.0.0   WEEK4DAY3_1                                                       02/15/2021 23:24:25 PAGE 2   
+
+  55   1       cmd(0x80); //cursor position to first position of first line
+  56   1       }
+  57          void senddata(unsigned char mymsg) //sub to write data
+  58           {
+  59   1       P0=mymsg;
+  60   1       rs=1;
+  61   1       rw=0;
+  62   1       en=1; //start data write
+  63   1       msdelay(2);
+  64   1       en=0; // end data write
+  65   1       }
+  66          
+  67          void CaD(unsigned char value)
+  68           {
+  69   1       unsigned char x,d1,d2,d3,a1,a2,a3;
+  70   1       x = value/10;
+  71   1       d1 = value%10;
+  72   1       a1=d1+'0';
+  73   1       d2 = x%10;
+  74   1       a2=d2+'0';
+  75   1       d3 = x/10;
+  76   1       a3 = d3+'0';
+  77   1       senddata(a1);
+  78   1       msdelay(10);
+  79   1       senddata(a2);
+  80   1       msdelay(10);
+  81   1       senddata(a3);
+  82   1       msdelay(10);
+  83   1       senddata(' ');
+  84   1       msdelay(200);
+  85   1      
+  86   1       }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    195    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       2
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

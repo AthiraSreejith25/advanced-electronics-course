@@ -1,0 +1,60 @@
+C51 COMPILER V9.60.0.0   WEEK7DAY3                                                         03/09/2021 00:26:29 PAGE 1   
+
+
+C51 COMPILER V9.60.0.0, COMPILATION OF MODULE WEEK7DAY3
+OBJECT MODULE PLACED IN .\Objects\week7day3.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE week7day3.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings
+                    -\week7day3.lst) TABS(2) OBJECT(.\Objects\week7day3.obj)
+
+line level    source
+
+   1          #include<reg51.h>
+   2          
+   3          sbit switch1=P3^0;                         // assign switch =port 3 , 0 th pin
+   4          
+   5          void ms_delay(unsigned int t) //To create a delay of 200 ms = 200 x 1ms
+   6              {
+   7   1          unsigned i,j ;
+   8   1          for(i=0;i<t;i++)       //200 times 1 ms delay
+   9   1          for(j=0;j<1275;j++);   //1ms delay
+  10   1          }
+  11          void main()
+  12          {
+  13   1          
+  14   1          if(switch1 == 1) // To repeat infinitely
+  15   1          {
+  16   2              P2=0x0C;           //P2 = 0000 1000 First Step
+  17   2              ms_delay(200);
+  18   2              P2=0x06;           //P2 = 0000 0100 Second Step
+  19   2              ms_delay(200);
+  20   2              P2=0x03;           //P2 = 0000 0010 Third Step
+  21   2              ms_delay(200);
+  22   2              P2=0x09;           //P2 = 0000 0001 Fourth Step
+  23   2              ms_delay(200);
+  24   2          }
+  25   1          else
+  26   1          {
+  27   2              P2=0x09;           //P2 = 0000 0001 Fourth Step
+  28   2              ms_delay(200);
+  29   2              P2=0x03;           //P2 = 0000 0010 Third Step
+  30   2              ms_delay(200);
+  31   2              P2=0x06;           //P2 = 0000 0100 Second Step
+  32   2              ms_delay(200);
+  33   2              P2=0x0C;           //P2 = 0000 1000 First Step
+  34   2              ms_delay(200);
+  35   2          }
+  36   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     85    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

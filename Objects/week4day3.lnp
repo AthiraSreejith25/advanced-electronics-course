@@ -1,0 +1,3 @@
+".\Objects\week4day3_1.obj" 
+TO ".\Objects\week4day3" 
+PRINT(".\Listings\week4day3.m51")

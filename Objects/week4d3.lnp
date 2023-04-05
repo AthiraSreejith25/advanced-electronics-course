@@ -1,0 +1,4 @@
+".\Objects\display3.obj",
+".\Objects\display_lcd.obj" 
+TO ".\Objects\week4d3" 
+PRINT(".\Listings\week4d3.m51")
